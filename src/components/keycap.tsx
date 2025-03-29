@@ -6,8 +6,6 @@ import {
 } from "@motion-canvas/core";
 import { KeyCap } from "@src/config";
 
-const FONT_COLOR = "white";
-
 export interface KeycapProps extends NodeProps {
   position?: SignalValue<PossibleVector2>;
   fill?: SignalValue<PossibleColor>;
@@ -28,7 +26,7 @@ export class Keycap extends Rect {
         <Txt
           text={props.label}
           fontSize={KeyCap.fontSize}
-          fill={FONT_COLOR}
+          fill={KeyCap.fontColor}
           position={[0, 0]} // Center
         />,
       );

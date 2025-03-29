@@ -3,33 +3,39 @@ import { createRef, ThreadGenerator } from "@motion-canvas/core";
 import { Colors, KeyCap } from "@src/config";
 import { Keycap } from "@src/components/keycap";
 
-import img from "@images/case_r.svg";
 import kle from "@images/ergosnm-kle.svg";
+import caseRight from "@images/case_right.svg";
+import caseLeft from "@images/case_left.svg";
 
 export default makeScene2D(function* (view) {
   view.fill(Colors.deepDark); // Background color
 
-  const imgRef = createRef<Img>();
-  view.add(<Img ref={imgRef} scale={2} x={-515} src={img} />);
+  const imgCaseRightRef = createRef<Img>();
+  const imgCaseLeftRef = createRef<Img>();
+  view.add(<Img ref={imgCaseRightRef} scale={2} x={-515} src={caseRight} />);
+  view.add(
+    <Img ref={imgCaseLeftRef} scale={2} x={555} y={-30} src={caseLeft} />,
+  );
   view.add(<Img scale={2} src={kle} />);
 
-  const imgPosition = imgRef().position;
+  const imgPositionRight = imgCaseRightRef().position;
+  const imgPositionLeft = imgCaseLeftRef().position;
 
   const keycapsRight = genKeycapsRight(
-    imgPosition.x() - 430,
-    imgPosition.y() - 290,
+    imgPositionRight.x() - 430,
+    imgPositionRight.y() - 290,
   );
   keycapsRight.forEach((item) => view.add(item));
 
   const kcrt = genKeycapsRightThumb(
-    imgPosition.x() + 322,
-    imgPosition.y() + 239,
+    imgPositionRight.x() + 322,
+    imgPositionRight.y() + 239,
   );
   view.add(kcrt);
 
   const keycapsLeft = genKeycapsLeft(
-    imgPosition.x() + 920,
-    imgPosition.y() - 290,
+    imgPositionLeft.x() + 920 - 515 - 555,
+    imgPositionLeft.y() - 290 + 30,
   );
   keycapsLeft.forEach((item) => view.add(item));
 
@@ -56,7 +62,9 @@ function genKeycapsRight(rootX: number, rootY: number) {
       const y = rootY + row * KeyCap.spacing + colOffset[col];
       const label = labelTable[row][col];
 
-      keycaps.push(<Keycap position={[x, y]} label={label} fill={"red"} />);
+      keycaps.push(
+        <Keycap position={[x, y]} label={label} fill={Colors.lightDark} />,
+      );
     }
   }
 
@@ -71,7 +79,7 @@ function genKeycapsRightThumb(rootX: number, rootY: number) {
       const x = rootX + col * KeyCap.spacing;
       const y = rootY + row * KeyCap.spacing;
 
-      keycaps.push(<Keycap position={[x, y]} fill={"green"} />);
+      keycaps.push(<Keycap position={[x, y]} fill={Colors.lightDark} />);
     }
   }
 
@@ -100,7 +108,9 @@ function genKeycapsLeft(rootX: number, rootY: number) {
       const y = rootY + row * KeyCap.spacing + colOffset[col];
       const label = labelTable[row][col];
 
-      keycaps.push(<Keycap position={[x, y]} label={label} fill={"red"} />);
+      keycaps.push(
+        <Keycap position={[x, y]} label={label} fill={Colors.lightDark} />,
+      );
     }
   }
 
