@@ -56,7 +56,8 @@ export default makeScene2D(function* (view) {
 function genKeycapsRight(rootX: number, rootY: number) {
   const colOffset = [0, 0, -28, -42, -28, -14];
   const labelTable = [
-    ["", "1", "2", "3", "4", "5"],
+    // ["", "1", "2", "3", "4", "5"],
+    ["", "", "", "", "", ""],
     ["", "Q", "W", "E", "R", "T"],
     ["", "A", "S", "D", "F", "G"],
     ["", "Z", "X", "C", "V", "B"],
@@ -102,7 +103,8 @@ function genKeycapsRightThumb(rootX: number, rootY: number) {
 function genKeycapsLeft(rootX: number, rootY: number) {
   const colOffset = [-14, -28, -42, -28, 0, 0];
   const labelTable = [
-    ["6", "7", "8", "9", "0", ""],
+    // ["6", "7", "8", "9", "0", ""],
+    ["", "", "", "", "", ""],
     ["Y", "U", "I", "O", "P", ""],
     ["H", "J", "K", "L", ":", ""],
     ["N", "M", "<", ">", "?", ""],
