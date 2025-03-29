@@ -6,7 +6,8 @@ import path from "path";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@src": path.resolve(__dirname, "src"),
+      "@images": path.resolve(__dirname, "images"),
     },
   },
   plugins: [motionCanvas(), ffmpeg()],
