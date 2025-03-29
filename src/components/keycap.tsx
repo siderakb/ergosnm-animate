@@ -1,4 +1,11 @@
-import { Rect, NodeProps, Txt, Node, colorSignal } from "@motion-canvas/2d";
+import {
+  Rect,
+  NodeProps,
+  Txt,
+  Node,
+  colorSignal,
+  Line,
+} from "@motion-canvas/2d";
 import {
   createRef,
   PossibleColor,
@@ -15,6 +22,7 @@ export interface KeycapProps extends NodeProps {
   primaryColor: SignalValue<PossibleColor>;
   secondaryColor: SignalValue<PossibleColor>;
   legend?: string;
+  homing?: boolean;
 }
 
 export class Keycap extends Node {
@@ -26,6 +34,7 @@ export class Keycap extends Node {
 
   private readonly cap = createRef<Rect>();
   private readonly legend = createRef<Txt>();
+  private readonly homing = createRef<Line>();
 
   public constructor(props: KeycapProps) {
     super({
@@ -41,6 +50,20 @@ export class Keycap extends Node {
         fill={props.primaryColor}
       />,
     );
+
+    if (props.homing) {
+      this.add(
+        <Line
+          ref={this.homing}
+          stroke={this.secondaryColor}
+          points={[
+            [-8, 35],
+            [8, 35],
+          ]}
+          lineWidth={2}
+        />,
+      );
+    }
 
     if (props.legend) {
       this.add(
@@ -58,16 +81,8 @@ export class Keycap extends Node {
   public *press(duration: number) {
     yield* tween(duration, (value) => {
       const scale = map(1, 0.85, easeInOutCubic(value));
-      this.cap().scale(scale);
-      this.legend().scale(scale);
+      this.scale(scale);
 
-      this.cap().fill(
-        Color.lerp(
-          this.primaryColor(),
-          this.secondaryColor(),
-          easeInOutCubic(value),
-        ),
-      );
       this.legend().fill(
         Color.lerp(
           this.secondaryColor(),
@@ -75,22 +90,28 @@ export class Keycap extends Node {
           easeInOutCubic(value),
         ),
       );
+      this.cap().fill(
+        Color.lerp(
+          this.primaryColor(),
+          this.secondaryColor(),
+          easeInOutCubic(value),
+        ),
+      );
+      //   this.homing()?.stroke(
+      //     Color.lerp(
+      //       this.primaryColor(),
+      //       this.secondaryColor(),
+      //       easeInOutCubic(value),
+      //     ),
+      //   );
     });
   }
 
   public *release(duration: number) {
     yield* tween(duration, (value) => {
       const scale = map(0.85, 1, easeInOutCubic(value));
-      this.cap().scale(scale);
-      this.legend().scale(scale);
+      this.scale(scale);
 
-      this.cap().fill(
-        Color.lerp(
-          this.secondaryColor(),
-          this.primaryColor(),
-          easeInOutCubic(value),
-        ),
-      );
       this.legend().fill(
         Color.lerp(
           this.primaryColor(),
@@ -98,6 +119,20 @@ export class Keycap extends Node {
           easeInOutCubic(value),
         ),
       );
+      this.cap().fill(
+        Color.lerp(
+          this.secondaryColor(),
+          this.primaryColor(),
+          easeInOutCubic(value),
+        ),
+      );
+      //   this.homing()?.stroke(
+      //     Color.lerp(
+      //       this.secondaryColor(),
+      //       this.primaryColor(),
+      //       easeInOutCubic(value),
+      //     ),
+      //   );
     });
   }
 }

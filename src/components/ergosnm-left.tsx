@@ -97,6 +97,7 @@ export class ErgoSnmLeft extends Node {
             legend={label}
             primaryColor={Colors.lightDark}
             secondaryColor={Colors.light}
+            homing={label === "J"}
           />,
         );
       }

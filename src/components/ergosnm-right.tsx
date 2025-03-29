@@ -77,6 +77,7 @@ export class ErgoSnmRight extends Node {
             legend={label}
             primaryColor={Colors.lightDark}
             secondaryColor={Colors.light}
+            homing={label === "F"}
           />,
         );
       }
