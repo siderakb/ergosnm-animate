@@ -71,7 +71,14 @@ export class ErgoSnmRight extends Node {
         const y = baseY + row * KeyCapDefine.spacing + colOffset[col];
         const label = labelTable[row][col];
 
-        caps.push(<Keycap position={[x, y]} label={label} fill={color} />);
+        caps.push(
+          <Keycap
+            position={[x, y]}
+            legend={label}
+            primaryColor={Colors.lightDark}
+            secondaryColor={Colors.light}
+          />,
+        );
       }
     }
 
@@ -90,7 +97,13 @@ export class ErgoSnmRight extends Node {
         const x = baseX + col * KeyCapDefine.spacing;
         const y = baseY + row * KeyCapDefine.spacing;
 
-        keycaps.push(<Keycap position={[x, y]} fill={color} />);
+        keycaps.push(
+          <Keycap
+            position={[x, y]}
+            primaryColor={Colors.lightDark}
+            secondaryColor={Colors.light}
+          />,
+        );
       }
     }
 

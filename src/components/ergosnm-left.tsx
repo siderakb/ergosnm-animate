@@ -94,8 +94,9 @@ export class ErgoSnmLeft extends Node {
           <Keycap
             ref={capsRef}
             position={[x, y]}
-            label={label}
-            fill={Colors.lightDark}
+            legend={label}
+            primaryColor={Colors.lightDark}
+            secondaryColor={Colors.light}
           />,
         );
       }

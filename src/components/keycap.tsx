@@ -1,39 +1,36 @@
-import { Rect, NodeProps, Txt, initial, signal, Node } from "@motion-canvas/2d";
+import { Rect, NodeProps, Txt, Node, colorSignal } from "@motion-canvas/2d";
 import {
   createRef,
   PossibleColor,
-  PossibleVector2,
-  all,
   SignalValue,
-  SimpleSignal,
   tween,
   map,
   easeInOutCubic,
   Color,
+  ColorSignal,
 } from "@motion-canvas/core";
-import { Colors, KeyCapDefine } from "@src/config";
+import { KeyCapDefine } from "@src/config";
 
 export interface KeycapProps extends NodeProps {
-  fill?: SignalValue<PossibleColor>;
-  label?: string;
-  pressed?: SignalValue<boolean>;
+  primaryColor: SignalValue<PossibleColor>;
+  secondaryColor: SignalValue<PossibleColor>;
+  legend?: string;
 }
 
 export class Keycap extends Node {
-  @initial(false)
-  @signal()
-  declare public readonly pressed: SimpleSignal<boolean, this>;
+  @colorSignal()
+  declare public readonly primaryColor: ColorSignal<this>;
 
-  private isPressed: boolean;
+  @colorSignal()
+  declare public readonly secondaryColor: ColorSignal<this>;
+
   private readonly cap = createRef<Rect>();
-  private readonly letter = createRef<Txt>();
+  private readonly legend = createRef<Txt>();
 
-  public constructor(props?: KeycapProps) {
+  public constructor(props: KeycapProps) {
     super({
       ...props,
     });
-
-    this.isPressed = this.pressed();
 
     this.add(
       <Rect
@@ -41,15 +38,15 @@ export class Keycap extends Node {
         width={KeyCapDefine.sideLength}
         height={KeyCapDefine.sideLength}
         radius={KeyCapDefine.radius}
-        fill={props?.fill}
+        fill={props.primaryColor}
       />,
     );
 
-    if (props?.label) {
+    if (props.legend) {
       this.add(
         <Txt
-          ref={this.letter}
-          text={props.label}
+          ref={this.legend}
+          text={props.legend}
           fontSize={KeyCapDefine.fontSize}
           fill={KeyCapDefine.fontColor}
           position={[0, 0]} // Center
@@ -59,62 +56,48 @@ export class Keycap extends Node {
   }
 
   public *press(duration: number) {
-    yield* all(
-      tween(duration, (value) => {
-        const scale = 0.85;
-        this.cap().scale(map(1, scale, easeInOutCubic(value)));
-        this.letter().scale(map(1, scale, easeInOutCubic(value)));
-      }),
+    yield* tween(duration, (value) => {
+      const scale = map(1, 0.85, easeInOutCubic(value));
+      this.cap().scale(scale);
+      this.legend().scale(scale);
 
-      tween(duration, (value) => {
-        this.cap().fill(
-          Color.lerp(
-            Colors.lightDark,
-            KeyCapDefine.fontColor,
-            easeInOutCubic(value),
-          ),
-        );
-
-        this.letter().fill(
-          Color.lerp(
-            KeyCapDefine.fontColor,
-            Colors.lightDark,
-            easeInOutCubic(value),
-          ),
-        );
-      }),
-    );
-
-    this.isPressed = true;
+      this.cap().fill(
+        Color.lerp(
+          this.primaryColor(),
+          this.secondaryColor(),
+          easeInOutCubic(value),
+        ),
+      );
+      this.legend().fill(
+        Color.lerp(
+          this.secondaryColor(),
+          this.primaryColor(),
+          easeInOutCubic(value),
+        ),
+      );
+    });
   }
 
   public *release(duration: number) {
-    yield* all(
-      tween(duration, (value) => {
-        const scale = 0.85;
-        this.cap().scale(map(scale, 1, easeInOutCubic(value)));
-        this.letter().scale(map(scale, 1, easeInOutCubic(value)));
-      }),
+    yield* tween(duration, (value) => {
+      const scale = map(0.85, 1, easeInOutCubic(value));
+      this.cap().scale(scale);
+      this.legend().scale(scale);
 
-      tween(duration, (value) => {
-        this.cap().fill(
-          Color.lerp(
-            KeyCapDefine.fontColor,
-            Colors.lightDark,
-            easeInOutCubic(value),
-          ),
-        );
-
-        this.letter().fill(
-          Color.lerp(
-            Colors.lightDark,
-            KeyCapDefine.fontColor,
-            easeInOutCubic(value),
-          ),
-        );
-      }),
-    );
-
-    this.isPressed = false;
+      this.cap().fill(
+        Color.lerp(
+          this.secondaryColor(),
+          this.primaryColor(),
+          easeInOutCubic(value),
+        ),
+      );
+      this.legend().fill(
+        Color.lerp(
+          this.primaryColor(),
+          this.secondaryColor(),
+          easeInOutCubic(value),
+        ),
+      );
+    });
   }
 }
