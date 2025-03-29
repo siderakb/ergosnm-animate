@@ -4,4 +4,6 @@ ignorePaths:
   - pnpm-lock.yaml
 words:
   - ergosnm
+  - Keycap
+  - keycaps
   - srgb
