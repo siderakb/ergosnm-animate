@@ -61,7 +61,7 @@ export class Keycap extends Node {
   public *press(duration: number) {
     yield* all(
       tween(duration, (value) => {
-        const scale = 0.9;
+        const scale = 0.85;
         this.cap().scale(map(1, scale, easeInOutCubic(value)));
         this.letter().scale(map(1, scale, easeInOutCubic(value)));
       }),
@@ -89,6 +89,32 @@ export class Keycap extends Node {
   }
 
   public *release(duration: number) {
+    yield* all(
+      tween(duration, (value) => {
+        const scale = 0.85;
+        this.cap().scale(map(scale, 1, easeInOutCubic(value)));
+        this.letter().scale(map(scale, 1, easeInOutCubic(value)));
+      }),
+
+      tween(duration, (value) => {
+        this.cap().fill(
+          Color.lerp(
+            KeyCapDefine.fontColor,
+            Colors.lightDark,
+            easeInOutCubic(value),
+          ),
+        );
+
+        this.letter().fill(
+          Color.lerp(
+            Colors.lightDark,
+            KeyCapDefine.fontColor,
+            easeInOutCubic(value),
+          ),
+        );
+      }),
+    );
+
     this.isPressed = false;
   }
 }

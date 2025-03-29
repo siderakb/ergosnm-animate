@@ -110,4 +110,8 @@ export class ErgoSnmLeft extends Node {
   public *press(row: number, col: number, duration: number) {
     yield* this.keycapsRef[row + 5 * col].press(duration);
   }
+
+  public *release(row: number, col: number, duration: number) {
+    yield* this.keycapsRef[row + 5 * col].release(duration);
+  }
 }

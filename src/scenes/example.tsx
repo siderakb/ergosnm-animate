@@ -14,5 +14,8 @@ export default makeScene2D(function* (view) {
   view.add(<ErgoSnmLeft ref={snmLeft} position={[620, 0]} />);
 
   yield* waitFor(0.5);
-  yield* snmLeft().press(1, 1, 0.18);
+  yield* snmLeft().press(1, 1, 0.16);
+  yield* waitFor(0.5);
+  yield* snmLeft().release(1, 1, 0.16);
+  yield* waitFor(0.5);
 });
