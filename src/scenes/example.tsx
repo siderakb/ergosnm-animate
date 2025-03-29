@@ -5,6 +5,8 @@ import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
 import { createRef, waitFor } from "@motion-canvas/core";
 
+import { Mouse } from "@src/components/mouse";
+
 export default makeScene2D(function* (view) {
   view.fill(Colors.deepDark); // Background color
 
@@ -12,6 +14,8 @@ export default makeScene2D(function* (view) {
 
   view.add(<ErgoSnmRight position={[-620, 0]} />);
   view.add(<ErgoSnmLeft ref={snmLeft} position={[620, 0]} />);
+
+  // view.add(<Mouse fill={Colors.dark} primaryColor={Colors.red} />);
 
   yield* waitFor(0.5);
   yield* snmLeft().press(
