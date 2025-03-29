@@ -4,3 +4,4 @@ ignorePaths:
   - pnpm-lock.yaml
 words:
   - ergosnm
+  - srgb
