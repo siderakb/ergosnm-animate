@@ -7,8 +7,11 @@ import {
   SignalValue,
   SimpleSignal,
   tween,
+  map,
+  easeInOutCubic,
+  Color,
 } from "@motion-canvas/core";
-import { KeyCapDefine } from "@src/config";
+import { Colors, KeyCapDefine } from "@src/config";
 
 export interface KeycapProps extends NodeProps {
   fill?: SignalValue<PossibleColor>;
@@ -57,11 +60,35 @@ export class Keycap extends Node {
 
   public *press(duration: number) {
     yield* all(
-      tween(duration, (_value) => {
-        this.cap().scale(0.9);
+      tween(duration, (value) => {
+        const scale = 0.9;
+        this.cap().scale(map(1, scale, easeInOutCubic(value)));
+        this.letter().scale(map(1, scale, easeInOutCubic(value)));
+      }),
+
+      tween(duration, (value) => {
+        this.cap().fill(
+          Color.lerp(
+            Colors.lightDark,
+            KeyCapDefine.fontColor,
+            easeInOutCubic(value),
+          ),
+        );
+
+        this.letter().fill(
+          Color.lerp(
+            KeyCapDefine.fontColor,
+            Colors.lightDark,
+            easeInOutCubic(value),
+          ),
+        );
       }),
     );
-    this.letter().fill("red");
+
     this.isPressed = true;
+  }
+
+  public *release(duration: number) {
+    this.isPressed = false;
   }
 }
