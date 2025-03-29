@@ -84,8 +84,6 @@ export class ErgoSnmLeft extends Node {
 
     for (let col = 0; col < 6; ++col) {
       for (let row = 0; row < 5; ++row) {
-        if (col === 0 && row === 4) break; // Skip
-
         const x = baseX + col * KeyCapDefine.spacing;
         const y = baseY + row * KeyCapDefine.spacing + colOffset[col];
         const label = labelTable[row][col];
@@ -98,6 +96,7 @@ export class ErgoSnmLeft extends Node {
             primaryColor={Colors.lightDark}
             secondaryColor={Colors.light}
             homing={label === "J"}
+            hide={col === 0 && row === 4}
           />,
         );
       }

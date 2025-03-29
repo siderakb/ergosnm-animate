@@ -23,6 +23,7 @@ export interface KeycapProps extends NodeProps {
   secondaryColor: SignalValue<PossibleColor>;
   legend?: string;
   homing?: boolean;
+  hide?: boolean;
 }
 
 export class Keycap extends Node {
@@ -41,15 +42,17 @@ export class Keycap extends Node {
       ...props,
     });
 
-    this.add(
-      <Rect
-        ref={this.cap}
-        width={KeyCapDefine.sideLength}
-        height={KeyCapDefine.sideLength}
-        radius={KeyCapDefine.radius}
-        fill={props.primaryColor}
-      />,
-    );
+    if (!props.hide) {
+      this.add(
+        <Rect
+          ref={this.cap}
+          width={KeyCapDefine.sideLength}
+          height={KeyCapDefine.sideLength}
+          radius={KeyCapDefine.radius}
+          fill={props.primaryColor}
+        />,
+      );
+    }
 
     if (props.homing) {
       this.add(
@@ -83,7 +86,7 @@ export class Keycap extends Node {
       const scale = map(1, 0.85, easeInOutCubic(value));
       this.scale(scale);
 
-      this.legend().fill(
+      this.legend()?.fill(
         Color.lerp(
           this.secondaryColor(),
           this.primaryColor(),
@@ -112,7 +115,7 @@ export class Keycap extends Node {
       const scale = map(0.85, 1, easeInOutCubic(value));
       this.scale(scale);
 
-      this.legend().fill(
+      this.legend()?.fill(
         Color.lerp(
           this.primaryColor(),
           this.secondaryColor(),
