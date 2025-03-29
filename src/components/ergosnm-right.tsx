@@ -9,7 +9,9 @@ import {
 import {
   ColorSignal,
   PossibleColor,
+  Reference,
   SignalValue,
+  all,
   createRef,
 } from "@motion-canvas/core";
 
@@ -33,6 +35,8 @@ export class ErgoSnmRight extends Node {
   declare public readonly capsColor: ColorSignal<this>;
 
   private readonly case = createRef<Img>();
+  private readonly layer1Ref = createRef<Rect>();
+  private readonly layer2Ref = createRef<Rect>();
 
   public constructor(props?: ErgoSnmProps) {
     super({
@@ -45,15 +49,7 @@ export class ErgoSnmRight extends Node {
     const caseX = casePosition.x();
     const caseY = casePosition.y();
 
-    this.add(this.getKeycapsMain(caseX - 430, caseY - 290, this.capsColor()));
-    this.add(
-      this.getKeycapsThumbCluster(caseX + 250, caseY - 20, this.capsColor()),
-    );
-  }
-
-  private getKeycapsMain(baseX: number, baseY: number, color: PossibleColor) {
-    const colOffset = [0, 0, -28, -42, -28, -14];
-    const labelTable = [
+    const legendTableLayer1 = [
       // ["", "1", "2", "3", "4", "5"],
       ["", "", "", "", "", ""],
       ["", "Q", "W", "E", "R", "T"],
@@ -61,6 +57,57 @@ export class ErgoSnmRight extends Node {
       ["", "Z", "X", "C", "V", "B"],
       ["", "", "", "", "Fn", ""],
     ];
+    this.add(
+      this.getKeycapsMain(
+        caseX - 430,
+        caseY - 290,
+        this.capsColor(),
+        legendTableLayer1,
+        this.layer1Ref,
+      ),
+    );
+    this.add(
+      this.getKeycapsThumbCluster(caseX + 250, caseY - 20, this.capsColor()),
+    );
+
+    const legendTableLayer2 = [
+      // ["", "1", "2", "3", "4", "5"],
+      ["", "", "", "", "", ""],
+      ["", "*", "7", "8", "9", "+"],
+      ["", "/", "4", "5", "6", "-"],
+      ["", "0", "1", "2", "3", "."],
+      ["", "", "", "", "Fn", ""],
+    ];
+    this.add(
+      this.getKeycapsMain(
+        caseX - 430,
+        caseY - 290,
+        this.capsColor(),
+        legendTableLayer2,
+        this.layer2Ref,
+      ),
+    );
+    this.layer2Ref().opacity(0);
+  }
+
+  public *switchLayer2(duration: number) {
+    yield* this.layer2Ref().opacity(1, duration / 2);
+    yield* this.layer1Ref().opacity(0, duration / 2);
+  }
+
+  public *switchLayer1(duration: number) {
+    yield* this.layer1Ref().opacity(1, duration / 2);
+    yield* this.layer2Ref().opacity(0, duration / 2);
+  }
+
+  private getKeycapsMain(
+    baseX: number,
+    baseY: number,
+    color: PossibleColor,
+    legendTable: string[][],
+    ref: Reference<Rect>,
+  ) {
+    const colOffset = [0, 0, -28, -42, -28, -14];
 
     const caps = [];
     for (let col = 0; col < 6; ++col) {
@@ -69,21 +116,21 @@ export class ErgoSnmRight extends Node {
 
         const x = baseX + col * KeyCapDefine.spacing;
         const y = baseY + row * KeyCapDefine.spacing + colOffset[col];
-        const label = labelTable[row][col];
+        const legend = legendTable[row][col];
 
         caps.push(
           <Keycap
             position={[x, y]}
-            legend={label}
-            primaryColor={Colors.lightDark}
+            legend={legend}
+            primaryColor={color}
             secondaryColor={Colors.light}
-            homing={label === "F"}
+            homing={col === 4 && row === 2}
           />,
         );
       }
     }
 
-    return <>{...caps}</>;
+    return <Rect ref={ref}>{...caps}</Rect>;
   }
 
   private getKeycapsThumbCluster(
