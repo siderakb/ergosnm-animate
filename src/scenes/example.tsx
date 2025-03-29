@@ -30,4 +30,6 @@ export default makeScene2D(function* (view) {
     0.16,
   );
   yield* waitFor(0.5);
+  yield* snmLeft().trackballArrow(true, true, false, false, 1);
+  yield* waitFor(0.5);
 });

@@ -20,6 +20,7 @@ import { Colors, KeyCapDefine } from "@src/config";
 import { Keycap } from "@src/components/keycap";
 
 import caseLeft from "@images/case_left.svg";
+import { Ball } from "@src/components/ball";
 
 export interface ErgoSnmProps extends NodeProps {
   caseColor?: SignalValue<PossibleColor>;
@@ -36,6 +37,7 @@ export class ErgoSnmLeft extends Node {
   declare public readonly capsColor: ColorSignal<this>;
 
   private readonly case = createRef<Img>();
+  private readonly ball = createRef<Ball>();
   private keycapsRef: ReferenceArray<Keycap>;
 
   public constructor(props?: ErgoSnmProps) {
@@ -49,7 +51,6 @@ export class ErgoSnmLeft extends Node {
     const caseX = casePosition.x();
     const caseY = casePosition.y();
 
-    const ballSize = 230;
     const { node, ref } = this.getKeycapsMain(
       caseX - 155,
       caseY - 260,
@@ -59,12 +60,12 @@ export class ErgoSnmLeft extends Node {
     this.keycapsRef = ref;
 
     this.add(
-      <Circle
+      <Ball
+        ref={this.ball}
+        fill={Colors.lightDark}
+        arrowColor={Colors.red}
         x={caseX - 310}
         y={caseY + 230}
-        width={ballSize}
-        height={ballSize}
-        fill={Colors.lightDark}
       />,
     );
   }
@@ -107,6 +108,16 @@ export class ErgoSnmLeft extends Node {
       node: <>{...caps}</>,
       ref: capsRef,
     };
+  }
+
+  public *trackballArrow(
+    l: boolean,
+    r: boolean,
+    u: boolean,
+    d: boolean,
+    duration: number,
+  ) {
+    yield* this.ball().arrow(l, r, u, d, duration);
   }
 
   public *press(keys: Array<number[]>, duration: number) {
