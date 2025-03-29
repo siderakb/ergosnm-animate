@@ -8,6 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@codemirror/language':
+        specifier: ^6.11.0
+        version: 6.11.0
+      '@lezer/highlight':
+        specifier: ^1.2.1
+        version: 1.2.1
+      '@lezer/javascript':
+        specifier: ^1.4.21
+        version: 1.4.21
       '@motion-canvas/2d':
         specifier: ^3.17.2
         version: 3.17.2
@@ -272,6 +281,9 @@ packages:
 
   '@lezer/highlight@1.2.1':
     resolution: {integrity: sha512-Z5duk4RN/3zuVO7Jq0pGLJ3qynpxUVsh7IbUbGj88+uV2ApSAn6kWg2au3iJb+0Zi7kKtqffIESgNcRXWZWmSA==}
+
+  '@lezer/javascript@1.4.21':
+    resolution: {integrity: sha512-lL+1fcuxWYPURMM/oFZLEDm0XuLN128QPV+VuGtKpeaOGdcl9F2LYC3nh1S9LkPqx9M0mndZFdXCipNAZpzIkQ==}
 
   '@lezer/lr@1.4.2':
     resolution: {integrity: sha512-pu0K1jCIdnQ12aWNaAVU5bzi7Bd1w54J3ECgANPmYLtQKP0HBj2cE/5coBD66MT10xbtIuUr7tg0Shbsvk0mDA==}
@@ -716,6 +728,12 @@ snapshots:
   '@lezer/highlight@1.2.1':
     dependencies:
       '@lezer/common': 1.2.3
+
+  '@lezer/javascript@1.4.21':
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
 
   '@lezer/lr@1.4.2':
     dependencies:

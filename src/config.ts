@@ -8,6 +8,19 @@ export class Colors {
   static readonly green = "#A3BE8C";
 }
 
+export const OneDarkProColors = {
+  dark: "#282C34",
+  gray: "#5C6370",
+  light: "#ABB2BF",
+  red: "#E06C75",
+  green: "#98C379",
+  yellow: "#E5C07B",
+  blue: "#61AFEF",
+  purple: "#C678DD",
+  cyan: "#56B6C2",
+  orange: "#D19A66",
+};
+
 export class KeyCapDefine {
   static readonly sideLength = 100;
   static readonly radius = 10;
