@@ -99,6 +99,22 @@ export class ErgoSnmRight extends Node {
     yield* all(...animations);
   }
 
+  public *press(keys: Array<number[]>, duration: number) {
+    const animations = keys.map(([row, col]) => {
+      return this.keycapsRef[row + 5 * col].press(duration);
+    });
+
+    yield* all(...animations);
+  }
+
+  public *release(keys: Array<number[]>, duration: number) {
+    const animations = keys.map(([row, col]) => {
+      return this.keycapsRef[row + 5 * col].release(duration);
+    });
+
+    yield* all(...animations);
+  }
+
   private getKeycapsMain(
     baseX: number,
     baseY: number,

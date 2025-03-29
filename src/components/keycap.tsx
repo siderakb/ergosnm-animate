@@ -128,7 +128,7 @@ export class Keycap extends Node {
           easeInOutCubic(value),
         ),
       );
-      this.cap().fill(
+      this.cap()?.fill(
         Color.lerp(
           this.primaryColor(),
           this.secondaryColor(),
@@ -157,7 +157,7 @@ export class Keycap extends Node {
           easeInOutCubic(value),
         ),
       );
-      this.cap().fill(
+      this.cap()?.fill(
         Color.lerp(
           this.secondaryColor(),
           this.primaryColor(),
