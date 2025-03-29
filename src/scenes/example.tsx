@@ -16,7 +16,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Img ref={imgCaseLeftRef} scale={2} x={555} y={-30} src={caseLeft} />,
   );
-  view.add(<Img scale={2} src={kle} />);
+  // view.add(<Img scale={2} src={kle} />);
 
   const imgPositionRight = imgCaseRightRef().position;
   const imgPositionLeft = imgCaseLeftRef().position;
@@ -27,17 +27,28 @@ export default makeScene2D(function* (view) {
   );
   keycapsRight.forEach((item) => view.add(item));
 
-  const kcrt = genKeycapsRightThumb(
+  const keycapsRightThumbCluster = genKeycapsRightThumb(
     imgPositionRight.x() + 322,
     imgPositionRight.y() + 239,
   );
-  view.add(kcrt);
+  view.add(keycapsRightThumbCluster);
 
   const keycapsLeft = genKeycapsLeft(
     imgPositionLeft.x() + 920 - 515 - 555,
     imgPositionLeft.y() - 290 + 30,
   );
   keycapsLeft.forEach((item) => view.add(item));
+
+  // Trackball
+  view.add(
+    <Circle
+      x={imgPositionLeft.x() - 310}
+      y={imgPositionLeft.y() + 230}
+      width={230}
+      height={230}
+      fill={Colors.lightDark}
+    />,
+  );
 
   yield;
 });
