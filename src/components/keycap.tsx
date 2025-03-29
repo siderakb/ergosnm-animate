@@ -4,10 +4,8 @@ import {
   PossibleVector2,
   SignalValue,
 } from "@motion-canvas/core";
+import { KeyCap } from "@src/config";
 
-const LENGTH = 100;
-const RADIUS = 10;
-const FONT_SIZE = 36;
 const FONT_COLOR = "white";
 
 export interface KeycapProps extends NodeProps {
@@ -19,9 +17,9 @@ export interface KeycapProps extends NodeProps {
 export class Keycap extends Rect {
   constructor(props?: KeycapProps) {
     super({
-      width: LENGTH,
-      height: LENGTH,
-      radius: RADIUS,
+      width: KeyCap.sideLength,
+      height: KeyCap.sideLength,
+      radius: KeyCap.radius,
       ...props,
     });
 
@@ -29,7 +27,7 @@ export class Keycap extends Rect {
       this.add(
         <Txt
           text={props.label}
-          fontSize={FONT_SIZE}
+          fontSize={KeyCap.fontSize}
           fill={FONT_COLOR}
           position={[0, 0]} // Center
         />,
