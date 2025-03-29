@@ -3,6 +3,8 @@ import { createRef, ThreadGenerator } from "@motion-canvas/core";
 import { Colors, KeyCap } from "@src/config";
 import { Keycap } from "@src/components/keycap";
 
+import { ErgoSnmRight } from "@src/components/ergosnm-right";
+
 import kle from "@images/ergosnm-kle.svg";
 import caseRight from "@images/case_right.svg";
 import caseLeft from "@images/case_left.svg";
@@ -10,45 +12,47 @@ import caseLeft from "@images/case_left.svg";
 export default makeScene2D(function* (view) {
   view.fill(Colors.deepDark); // Background color
 
-  const imgCaseRightRef = createRef<Img>();
-  const imgCaseLeftRef = createRef<Img>();
-  view.add(<Img ref={imgCaseRightRef} scale={2} x={-515} src={caseRight} />);
-  view.add(
-    <Img ref={imgCaseLeftRef} scale={2} x={555} y={-30} src={caseLeft} />,
-  );
+  view.add(<ErgoSnmRight />);
+
+  // const imgCaseRightRef = createRef<Img>();
+  // const imgCaseLeftRef = createRef<Img>();
+  // view.add(<Img ref={imgCaseRightRef} scale={2} x={-515} src={caseRight} />);
+  // view.add(
+  //   <Img ref={imgCaseLeftRef} scale={2} x={555} y={-30} src={caseLeft} />,
+  // );
   // view.add(<Img scale={2} src={kle} />);
 
-  const imgPositionRight = imgCaseRightRef().position;
-  const imgPositionLeft = imgCaseLeftRef().position;
+  // const imgPositionRight = imgCaseRightRef().position;
+  // const imgPositionLeft = imgCaseLeftRef().position;
 
-  const keycapsRight = genKeycapsRight(
-    imgPositionRight.x() - 430,
-    imgPositionRight.y() - 290,
-  );
-  keycapsRight.forEach((item) => view.add(item));
+  // const keycapsRight = genKeycapsRight(
+  //   imgPositionRight.x() - 430,
+  //   imgPositionRight.y() - 290,
+  // );
+  // keycapsRight.forEach((item) => view.add(item));
 
-  const keycapsRightThumbCluster = genKeycapsRightThumb(
-    imgPositionRight.x() + 322,
-    imgPositionRight.y() + 239,
-  );
-  view.add(keycapsRightThumbCluster);
+  // const keycapsRightThumbCluster = genKeycapsRightThumb(
+  //   imgPositionRight.x() + 322,
+  //   imgPositionRight.y() + 239,
+  // );
+  // view.add(keycapsRightThumbCluster);
 
-  const keycapsLeft = genKeycapsLeft(
-    imgPositionLeft.x() + 920 - 515 - 555,
-    imgPositionLeft.y() - 290 + 30,
-  );
-  keycapsLeft.forEach((item) => view.add(item));
+  // const keycapsLeft = genKeycapsLeft(
+  //   imgPositionLeft.x() + 920 - 515 - 555,
+  //   imgPositionLeft.y() - 290 + 30,
+  // );
+  // keycapsLeft.forEach((item) => view.add(item));
 
-  // Trackball
-  view.add(
-    <Circle
-      x={imgPositionLeft.x() - 310}
-      y={imgPositionLeft.y() + 230}
-      width={230}
-      height={230}
-      fill={Colors.lightDark}
-    />,
-  );
+  // // Trackball
+  // view.add(
+  //   <Circle
+  //     x={imgPositionLeft.x() - 310}
+  //     y={imgPositionLeft.y() + 230}
+  //     width={230}
+  //     height={230}
+  //     fill={Colors.lightDark}
+  //   />,
+  // );
 
   yield;
 });
