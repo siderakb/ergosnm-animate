@@ -13,7 +13,7 @@ import {
   createRef,
 } from "@motion-canvas/core";
 
-import { Colors, KeyCap } from "@src/config";
+import { Colors, KeyCapDefine } from "@src/config";
 import { Keycap } from "@src/components/keycap";
 
 import caseRight from "@images/case_right.svg";
@@ -67,8 +67,8 @@ export class ErgoSnmRight extends Node {
       for (let row = 0; row < 5; ++row) {
         if (col === 5 && row === 4) break; // Skip
 
-        const x = baseX + col * KeyCap.spacing;
-        const y = baseY + row * KeyCap.spacing + colOffset[col];
+        const x = baseX + col * KeyCapDefine.spacing;
+        const y = baseY + row * KeyCapDefine.spacing + colOffset[col];
         const label = labelTable[row][col];
 
         caps.push(<Keycap position={[x, y]} label={label} fill={color} />);
@@ -87,8 +87,8 @@ export class ErgoSnmRight extends Node {
 
     for (let col = 0; col < 3; ++col) {
       for (let row = 0; row < 2; ++row) {
-        const x = baseX + col * KeyCap.spacing;
-        const y = baseY + row * KeyCap.spacing;
+        const x = baseX + col * KeyCapDefine.spacing;
+        const y = baseY + row * KeyCapDefine.spacing;
 
         keycaps.push(<Keycap position={[x, y]} fill={color} />);
       }

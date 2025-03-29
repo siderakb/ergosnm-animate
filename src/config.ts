@@ -8,7 +8,7 @@ export class Colors {
   static readonly green = "#A3BE8C";
 }
 
-export class KeyCap {
+export class KeyCapDefine {
   static readonly sideLength = 100;
   static readonly radius = 10;
   static readonly spacing = this.sideLength + 8;

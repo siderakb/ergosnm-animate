@@ -9,11 +9,13 @@ import {
 import {
   ColorSignal,
   PossibleColor,
+  ReferenceArray,
   SignalValue,
   createRef,
+  createRefArray,
 } from "@motion-canvas/core";
 
-import { Colors, KeyCap } from "@src/config";
+import { Colors, KeyCapDefine } from "@src/config";
 import { Keycap } from "@src/components/keycap";
 
 import caseLeft from "@images/case_left.svg";
@@ -33,6 +35,7 @@ export class ErgoSnmLeft extends Node {
   declare public readonly capsColor: ColorSignal<this>;
 
   private readonly case = createRef<Img>();
+  private keycapsRef: ReferenceArray<Keycap>;
 
   public constructor(props?: ErgoSnmProps) {
     super({
@@ -46,7 +49,14 @@ export class ErgoSnmLeft extends Node {
     const caseY = casePosition.y();
 
     const ballSize = 230;
-    this.add(this.getKeycapsMain(caseX - 155, caseY - 260, this.capsColor()));
+    const { node, ref } = this.getKeycapsMain(
+      caseX - 155,
+      caseY - 260,
+      this.capsColor(),
+    );
+    this.add(node);
+    this.keycapsRef = ref;
+
     this.add(
       <Circle
         x={caseX - 310}
@@ -70,21 +80,34 @@ export class ErgoSnmLeft extends Node {
     ];
 
     const caps = [];
+    const capsRef = createRefArray<Keycap>();
 
     for (let col = 0; col < 6; ++col) {
       for (let row = 0; row < 5; ++row) {
         if (col === 0 && row === 4) break; // Skip
 
-        const x = baseX + col * KeyCap.spacing;
-        const y = baseY + row * KeyCap.spacing + colOffset[col];
+        const x = baseX + col * KeyCapDefine.spacing;
+        const y = baseY + row * KeyCapDefine.spacing + colOffset[col];
         const label = labelTable[row][col];
 
         caps.push(
-          <Keycap position={[x, y]} label={label} fill={Colors.lightDark} />,
+          <Keycap
+            ref={capsRef}
+            position={[x, y]}
+            label={label}
+            fill={Colors.lightDark}
+          />,
         );
       }
     }
 
-    return <>{...caps}</>;
+    return {
+      node: <>{...caps}</>,
+      ref: capsRef,
+    };
+  }
+
+  public *press(row: number, col: number, duration: number) {
+    yield* this.keycapsRef[row + 5 * col].press(duration);
   }
 }
