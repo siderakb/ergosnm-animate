@@ -11,6 +11,7 @@ import {
   PossibleColor,
   ReferenceArray,
   SignalValue,
+  all,
   createRef,
   createRefArray,
 } from "@motion-canvas/core";
@@ -108,11 +109,19 @@ export class ErgoSnmLeft extends Node {
     };
   }
 
-  public *press(row: number, col: number, duration: number) {
-    yield* this.keycapsRef[row + 5 * col].press(duration);
+  public *press(keys: Array<number[]>, duration: number) {
+    const animations = keys.map(([row, col]) => {
+      return this.keycapsRef[row + 5 * col].press(duration);
+    });
+
+    yield* all(...animations);
   }
 
-  public *release(row: number, col: number, duration: number) {
-    yield* this.keycapsRef[row + 5 * col].release(duration);
+  public *release(keys: Array<number[]>, duration: number) {
+    const animations = keys.map(([row, col]) => {
+      return this.keycapsRef[row + 5 * col].release(duration);
+    });
+
+    yield* all(...animations);
   }
 }
