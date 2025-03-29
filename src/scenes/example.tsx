@@ -22,10 +22,18 @@ export default makeScene2D(function* (view) {
   view.add(<Monitor fill={Colors.dark} position={[0, -600]} />);
 
   yield* waitFor(0.5);
-  yield* all(snmRight().switchLayer2(0.5), snmLeft().press([[4, 1]], 0.16));
+  yield* all(
+    snmRight().switchLayer1(0.5),
+    snmLeft().press([[4, 1]], 0.16),
+    snmLeft().switchLayer1(0.5),
+  );
   yield* waitFor(0.5);
-  yield* snmLeft().trackballArrow(true, true, false, false, 1);
-  yield* waitFor(0.5);
-  yield* all(snmRight().switchLayer1(0.5), snmLeft().release([[4, 1]], 0.16));
+  // yield* snmLeft().trackballArrow(true, true, false, false, 1);
+  // yield* waitFor(0.5);
+  yield* all(
+    snmRight().switchLayer0(0.5),
+    snmLeft().release([[4, 1]], 0.16),
+    snmLeft().switchLayer0(0.5),
+  );
   yield* waitFor(0.5);
 });

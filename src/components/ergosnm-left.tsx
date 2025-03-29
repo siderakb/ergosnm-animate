@@ -80,6 +80,15 @@ export class ErgoSnmLeft extends Node {
       ["N", "M", "<", ">", "?", ""],
       ["", "Fn", "", "", "", ""],
     ];
+    const labelTable2 = [
+      // ["6", "7", "8", "9", "0", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      // ["←", "↓", "↑", "→", ":", ""],
+      ["◀", "▼", "▲", "▶", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "Fn", "", "", "", ""],
+    ];
 
     const caps = [];
     const capsRef = createRefArray<Keycap>();
@@ -89,12 +98,13 @@ export class ErgoSnmLeft extends Node {
         const x = baseX + col * KeyCapDefine.spacing;
         const y = baseY + row * KeyCapDefine.spacing + colOffset[col];
         const label = labelTable[row][col];
+        const label2 = labelTable2[row][col];
 
         caps.push(
           <Keycap
             ref={capsRef}
             position={[x, y]}
-            legend={label}
+            legend={[label, label2]}
             primaryColor={Colors.lightDark}
             secondaryColor={Colors.light}
             homing={label === "J"}
@@ -118,6 +128,20 @@ export class ErgoSnmLeft extends Node {
     duration: number,
   ) {
     yield* this.ball().arrow(l, r, u, d, duration);
+  }
+
+  public *switchLayer1(duration: number) {
+    const animations = this.keycapsRef.map((keycap) =>
+      keycap.switchLayer(1, duration),
+    );
+    yield* all(...animations);
+  }
+
+  public *switchLayer0(duration: number) {
+    const animations = this.keycapsRef.map((keycap) =>
+      keycap.switchLayer(0, duration),
+    );
+    yield* all(...animations);
   }
 
   public *press(keys: Array<number[]>, duration: number) {

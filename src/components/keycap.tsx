@@ -15,13 +15,15 @@ import {
   easeInOutCubic,
   Color,
   ColorSignal,
+  Signal,
+  all,
 } from "@motion-canvas/core";
 import { KeyCapDefine } from "@src/config";
 
 export interface KeycapProps extends NodeProps {
   primaryColor: SignalValue<PossibleColor>;
   secondaryColor: SignalValue<PossibleColor>;
-  legend?: string;
+  legend?: string[];
   homing?: boolean;
   hide?: boolean;
 }
@@ -33,14 +35,19 @@ export class Keycap extends Node {
   @colorSignal()
   declare public readonly secondaryColor: ColorSignal<this>;
 
+  private readonly legend: string[] = [];
+
   private readonly cap = createRef<Rect>();
-  private readonly legend = createRef<Txt>();
+  private readonly legendRef0 = createRef<Txt>();
+  private readonly legendRef1 = createRef<Txt>();
   private readonly homing = createRef<Line>();
 
   public constructor(props: KeycapProps) {
     super({
       ...props,
     });
+
+    this.legend = props.legend ?? [];
 
     if (!props.hide) {
       this.add(
@@ -68,15 +75,43 @@ export class Keycap extends Node {
       );
     }
 
-    if (props.legend) {
+    if (props.legend && props.legend.length > 0) {
       this.add(
         <Txt
-          ref={this.legend}
-          text={props.legend}
+          ref={this.legendRef0}
+          text={props.legend[0]}
           fontSize={KeyCapDefine.fontSize}
           fill={KeyCapDefine.fontColor}
           position={[0, 0]} // Center
         />,
+      );
+      this.add(
+        <Txt
+          ref={this.legendRef1}
+          text={props.legend[1]}
+          fontSize={KeyCapDefine.fontSize}
+          fill={KeyCapDefine.fontColor}
+          position={[0, 0]} // Center
+          opacity={0}
+        />,
+      );
+    }
+  }
+
+  public *switchLayer(layer: number, duration: number) {
+    if (this.legendRef0().text() === this.legendRef1().text()) {
+      return;
+    }
+
+    if (layer === 0) {
+      yield* all(
+        this.legendRef1().opacity(0, duration / 2),
+        this.legendRef0().opacity(100, duration / 2),
+      );
+    } else if (layer === 1) {
+      yield* all(
+        this.legendRef0().opacity(0, duration / 2),
+        this.legendRef1().opacity(100, duration / 2),
       );
     }
   }
@@ -86,7 +121,7 @@ export class Keycap extends Node {
       const scale = map(1, 0.85, easeInOutCubic(value));
       this.scale(scale);
 
-      this.legend()?.fill(
+      this.legendRef0()?.fill(
         Color.lerp(
           this.secondaryColor(),
           this.primaryColor(),
@@ -115,7 +150,7 @@ export class Keycap extends Node {
       const scale = map(0.85, 1, easeInOutCubic(value));
       this.scale(scale);
 
-      this.legend()?.fill(
+      this.legendRef0()?.fill(
         Color.lerp(
           this.primaryColor(),
           this.secondaryColor(),
