@@ -6,17 +6,15 @@ import { ErgoSnmLeft } from "@src/components/ergosnm-left";
 import { all, createRef, waitFor } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
-  view.fill(Colors.deepDark); // Background color
+  //   view.fill(Colors.deepDark); // Background color
 
+  const snmY = 250;
+  const snmX = 750;
+  const snmScale = 1.25;
   const snmRight = createRef<ErgoSnmRight>();
   const snmLeft = createRef<ErgoSnmLeft>();
-
-  const kbY = 250;
-  const scale = 1.25;
-  view.add(
-    <ErgoSnmRight ref={snmRight} position={[-750, kbY]} scale={scale} />,
-  );
-  view.add(<ErgoSnmLeft ref={snmLeft} position={[750, kbY]} scale={scale} />);
+  view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
+  view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
 
   const textRef = createRef<Txt>();
   view.add(
@@ -48,4 +46,6 @@ export default makeScene2D(function* (view) {
   yield* snmLeft().release([[1, 3]], 0.16);
 
   yield* waitFor(0.5);
+  yield* textRef().opacity(0, 0.25);
+  //   yield* textRef().text("", 0.25);
 });

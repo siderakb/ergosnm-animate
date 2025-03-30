@@ -8,5 +8,5 @@ import { parser } from "@lezer/javascript";
 Code.defaultHighlighter = new LezerHighlighter(parser);
 
 export default makeProject({
-  scenes: [opening],
+  scenes: [opening, example],
 });
