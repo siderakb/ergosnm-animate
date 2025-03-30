@@ -52,18 +52,18 @@ export default makeScene2D(function* (view) {
     />,
   );
 
-  const textRef = createRef<Txt>();
-  view.add(
-    <Txt
-      ref={textRef}
-      text="Left click"
-      fill={Colors.light}
-      fontSize={128}
-      position={[0, -500]}
-      opacity={0}
-      fontFamily={"Inconsolata"}
-    />,
-  );
+  //   const textRef = createRef<Txt>();
+  //   view.add(
+  //     <Txt
+  //       ref={textRef}
+  //       text="Left click"
+  //       fill={Colors.light}
+  //       fontSize={128}
+  //       position={[0, -500]}
+  //       opacity={0}
+  //       fontFamily={"Inconsolata"}
+  //     />,
+  //   );
 
   //   const noteRef = createRef<Txt>();
   //   view.add(
@@ -146,12 +146,79 @@ export default makeScene2D(function* (view) {
   );
 
   yield* waitFor(1);
-
   yield* all(
     rightClickMenuRef().opacity(0, 0.15),
-    cubeRef().height(0, 0.15),
-    cursorRef().opacity(0, 0.15),
+    snmLeft().press(
+      [
+        [2, 1],
+        [2, 2],
+      ],
+      0.16,
+    ),
   );
+  yield* snmLeft().release(
+    [
+      [2, 1],
+      [2, 2],
+    ],
+    0.16,
+  );
+
+  // Switch layer
+  yield* waitFor(1);
+  yield* all(
+    snmRight().press([[4, 4]], 0.16),
+    snmRight().switchLayer1(0.5),
+    snmLeft().switchLayer1(0.5),
+  );
+
+  // Scroll up
+  yield* waitFor(0.5);
+  yield* all(
+    cubeRef().scale(2, 1.8),
+    snmLeft().trackballArrow(true, true, true, true, 1), // TODO
+  );
+  yield* snmLeft().trackballArrow(false, false, false, false, 1);
+
+  // Switch layer
+  yield* waitFor(1);
+  yield* all(
+    snmRight().release([[4, 4]], 0.16),
+    snmRight().switchLayer0(0.5),
+    snmLeft().switchLayer0(0.5),
+  );
+
+  // Middle click
+  yield* waitFor(1);
+  yield* all(
+    snmLeft().press(
+      [
+        [2, 3],
+        [2, 1],
+      ],
+      0.16,
+    ),
+  );
+
+  // Scroll down
+  yield* waitFor(1);
+  yield* all(
+    cubeRef().scale(1, 1.8),
+    snmLeft().trackballArrow(true, true, true, true, 0.16), // TODO
+  );
+  yield* snmLeft().trackballArrow(false, false, false, false, 0.16);
+
+  yield* waitFor(1);
+  yield* snmLeft().release(
+    [
+      [2, 3],
+      [2, 1],
+    ],
+    0.16,
+  );
+
+  yield* waitFor(1);
+  yield* all(cubeRef().height(0, 0.15), cursorRef().opacity(0, 0.15));
 
   yield* waitFor(0.25);
 });

@@ -75,7 +75,7 @@ export class Ball extends Node {
       const show = map(0, 100, easeInOutCubic(value));
       const hide = map(100, 0, easeInOutCubic(value));
 
-      if (l && oriL === 0) {
+      if (l /* && oriL === 0 */) {
         this.arrowRef[0].opacity(show);
       } else if (!l && oriL === 100) {
         this.arrowRef[0].opacity(hide);
@@ -83,7 +83,7 @@ export class Ball extends Node {
         this.arrowRef[0].opacity(hide);
       }
 
-      if (r && oriR === 0) {
+      if (r /* && oriR === 0 */) {
         this.arrowRef[1].opacity(show);
       } else if (!r && oriR === 100) {
         this.arrowRef[1].opacity(hide);
@@ -91,7 +91,7 @@ export class Ball extends Node {
         this.arrowRef[1].opacity(hide);
       }
 
-      if (u && oriU === 0) {
+      if (u /* && oriU === 0 */) {
         this.arrowRef[2].opacity(show);
       } else if (!u && oriU === 100) {
         this.arrowRef[2].opacity(hide);
@@ -99,7 +99,7 @@ export class Ball extends Node {
         this.arrowRef[2].opacity(hide);
       }
 
-      if (d && oriD === 0) {
+      if (d /*  && oriD === 0 */) {
         this.arrowRef[3].opacity(show);
       } else if (!d && oriD === 100) {
         this.arrowRef[3].opacity(hide);

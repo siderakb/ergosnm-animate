@@ -63,7 +63,8 @@ export class ErgoSnmLeft extends Node {
       <Ball
         ref={this.ball}
         fill={Colors.lightDark}
-        arrowColor={Colors.red}
+        // arrowColor={Colors.red}
+        arrowColor={Colors.light}
         x={caseX - 310}
         y={caseY + 230}
       />,
