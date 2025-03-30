@@ -1,13 +1,3 @@
-export class Colors {
-  static readonly deepDark = "#282C34";
-  static readonly dark = "#3B4252";
-  static readonly lightDark = "#4c566a";
-  static readonly light = "#E5E9F0";
-
-  static readonly red = "#BF616A";
-  static readonly green = "#A3BE8C";
-}
-
 export const OneDarkProColors = {
   dark: "#282C34",
   gray: "#5C6370",
@@ -20,6 +10,17 @@ export const OneDarkProColors = {
   cyan: "#56B6C2",
   orange: "#D19A66",
 };
+
+export class Colors {
+  static readonly deepDark = "#282C34";
+  static readonly dark = "#3B4252";
+  static readonly lightDark = "#4c566a";
+  static readonly light = "#E5E9F0";
+
+  static readonly red = "#BF616A";
+  static readonly green = "#A3BE8C";
+  static readonly orange = OneDarkProColors.orange;
+}
 
 export class KeyCapDefine {
   static readonly sideLength = 100;

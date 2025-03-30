@@ -6,6 +6,7 @@ import keymapNumpad from "./scenes/keymap-numpad?scene";
 import keymapMedia from "./scenes/keymap-media?scene";
 import keymapArrow from "./scenes/keymap-arrow?scene";
 import keymapMouse from "./scenes/keymap-mouse?scene";
+import trackball from "./scenes/trackball?scene";
 
 import { Code, LezerHighlighter } from "@motion-canvas/2d";
 import { parser } from "@lezer/javascript";
@@ -22,6 +23,7 @@ export default makeProject({
     // keymapNumpad,
     // keymapMedia,
     // keymapArrow,
-    keymapMouse,
+    // keymapMouse,
+    trackball,
   ],
 });

@@ -79,11 +79,15 @@ export class Ball extends Node {
         this.arrowRef[0].opacity(show);
       } else if (!l && oriL === 100) {
         this.arrowRef[0].opacity(hide);
+      } else {
+        this.arrowRef[0].opacity(hide);
       }
 
       if (r && oriR === 0) {
         this.arrowRef[1].opacity(show);
       } else if (!r && oriR === 100) {
+        this.arrowRef[1].opacity(hide);
+      } else {
         this.arrowRef[1].opacity(hide);
       }
 
@@ -91,11 +95,15 @@ export class Ball extends Node {
         this.arrowRef[2].opacity(show);
       } else if (!u && oriU === 100) {
         this.arrowRef[2].opacity(hide);
+      } else {
+        this.arrowRef[2].opacity(hide);
       }
 
       if (d && oriD === 0) {
         this.arrowRef[3].opacity(show);
       } else if (!d && oriD === 100) {
+        this.arrowRef[3].opacity(hide);
+      } else {
         this.arrowRef[3].opacity(hide);
       }
     });
