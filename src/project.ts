@@ -16,11 +16,12 @@ Code.defaultHighlighter = new LezerHighlighter(parser);
 
 export default makeProject({
   scenes: [
-    opening,
-    keymap,
-    keymapNumpad,
-    keymapMedia,
-    keymapArrow,
+    // example,
+    // opening,
+    // keymap,
+    // keymapNumpad,
+    // keymapMedia,
+    // keymapArrow,
     keymapMouse,
   ],
 });

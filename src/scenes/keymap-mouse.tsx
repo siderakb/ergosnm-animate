@@ -3,6 +3,7 @@ import { Colors } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
+import { Cursor } from "@src/components/cursor";
 import { all, createRef, waitFor } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
@@ -15,6 +16,8 @@ export default makeScene2D(function* (view) {
   const snmLeft = createRef<ErgoSnmLeft>();
   view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
   view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
+
+  view.add(<Cursor fill={Colors.light} />);
 
   const textRef = createRef<Txt>();
   view.add(
