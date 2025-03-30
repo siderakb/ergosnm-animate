@@ -20,16 +20,18 @@ export default makeScene2D(function* (view) {
   view.add(
     <Txt
       ref={textRef}
-      text=""
+      text="Switching layers"
       fill={Colors.light}
       fontSize={128}
       position={[0, -500]}
       fontFamily={"Inconsolata"}
+      opacity={0}
     />,
   );
 
   // Layer switching
   yield* waitFor(0.25);
+  yield* textRef().opacity(1, 0.35);
   yield* all(
     snmLeft().press([[4, 1]], 0.16),
     snmRight().switchLayer1(0.5),
@@ -56,4 +58,5 @@ export default makeScene2D(function* (view) {
     snmLeft().switchLayer0(0.5),
   );
   yield* waitFor(0.25);
+  yield* textRef().opacity(0, 0.5);
 });
