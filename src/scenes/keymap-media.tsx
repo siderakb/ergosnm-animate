@@ -21,10 +21,12 @@ export default makeScene2D(function* (view) {
     <Txt
       ref={textRef}
       text="Volume 50%"
+      //   text="Volume [#####     ]"
       fill={Colors.light}
       fontSize={128}
       position={[0, -500]}
       opacity={0}
+      fontFamily={"Inconsolata"}
     />,
   );
 
@@ -44,16 +46,19 @@ export default makeScene2D(function* (view) {
   yield* all(
     snmLeft().press([[1, 2]], 0.16),
     textRef().text("Volume 60%", 0.16),
+    // textRef().text("Volume [######    ]", 0.16),
   );
   yield* snmLeft().release([[1, 2]], 0.16);
   yield* all(
     snmLeft().press([[1, 2]], 0.16),
     textRef().text("Volume 70%", 0.16),
+    // textRef().text("Volume [#######   ]", 0.16),
   );
   yield* snmLeft().release([[1, 2]], 0.16);
   yield* all(
     snmLeft().press([[1, 2]], 0.16),
     textRef().text("Volume 80%", 0.16),
+    // textRef().text("Volume [########  ]", 0.16),
   );
   yield* snmLeft().release([[1, 2]], 0.16);
 
@@ -61,18 +66,21 @@ export default makeScene2D(function* (view) {
   yield* all(
     snmLeft().press([[1, 1]], 0.16),
     textRef().text("Volume 70%", 0.16),
+    // textRef().text("Volume [#######   ]", 0.16),
   );
   yield* snmLeft().release([[1, 1]], 0.16);
   yield* all(
     snmLeft().press([[1, 1]], 0.16),
     textRef().text("Volume 60%", 0.16),
+    // textRef().text("Volume [######    ]", 0.16),
   );
   yield* snmLeft().release([[1, 1]], 0.16);
 
   yield* waitFor(0.15);
   yield* all(
     snmLeft().press([[1, 0]], 0.16),
-    textRef().text("Volume Off", 0.16),
+    textRef().text("Volume Off", 0.25),
+    // textRef().text("Volume [          ]", 0.16),
   );
   yield* snmLeft().release([[1, 0]], 0.16);
 

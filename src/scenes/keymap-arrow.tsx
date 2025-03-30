@@ -24,6 +24,7 @@ export default makeScene2D(function* (view) {
       fill={Colors.light}
       fontSize={128}
       position={[0, -500]}
+      fontFamily={"Fira Code"} // FIXME
     />,
   );
 

@@ -10,9 +10,17 @@ import keymapMouse from "./scenes/keymap-mouse?scene";
 import { Code, LezerHighlighter } from "@motion-canvas/2d";
 import { parser } from "@lezer/javascript";
 
+import "./global.css";
+
 Code.defaultHighlighter = new LezerHighlighter(parser);
 
 export default makeProject({
-  // scenes: [opening, example],
-  scenes: [keymapMouse],
+  scenes: [
+    opening,
+    keymap,
+    keymapNumpad,
+    keymapMedia,
+    keymapArrow,
+    keymapMouse,
+  ],
 });

@@ -85,6 +85,8 @@ export class Keycap extends Node {
               ? KeyCapDefine.fontSize
               : KeyCapDefine.fontSize / 1.25
           }
+          fontFamily={"Inconsolata"}
+          fontWeight={700}
           fill={KeyCapDefine.fontColor}
           position={[0, 0]} // Center
         />,
@@ -98,6 +100,8 @@ export class Keycap extends Node {
               ? KeyCapDefine.fontSize
               : KeyCapDefine.fontSize / 1.25
           }
+          fontFamily={"Inconsolata"}
+          fontWeight={700}
           fill={KeyCapDefine.fontColor}
           position={[0, 0]} // Center
           opacity={0}

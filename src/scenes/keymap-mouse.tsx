@@ -25,6 +25,7 @@ export default makeScene2D(function* (view) {
       fontSize={128}
       position={[0, -500]}
       opacity={0}
+      fontFamily={"Inconsolata"}
     />,
   );
 

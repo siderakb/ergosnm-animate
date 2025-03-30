@@ -26,7 +26,7 @@ export class KeyCapDefine {
   static readonly radius = 10;
   static readonly spacing = this.sideLength + 8;
 
-  static readonly fontSize = 36;
+  static readonly fontSize = 42;
   static readonly fontColor = Colors.light;
 
   static readonly highlightColor = Colors.red;
