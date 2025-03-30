@@ -11,6 +11,28 @@ export const OneDarkProColors = {
   orange: "#D19A66",
 };
 
+export const NordColors = {
+  dark0: "#2E3440",
+  dark1: "#3B4252",
+  dark2: "#434C5E",
+  dark3: "#4C566A",
+
+  light0: "#D8DEE9",
+  light1: "#E5E9F0",
+  light2: "#ECEFF4",
+
+  frost0: "#8FBCBB",
+  frost1: "#88C0D0",
+  frost2: "#81A1C1",
+  frost3: "#5E81AC",
+
+  red: "#BF616A",
+  orange: "#D08770",
+  yellow: "#EBCB8B",
+  green: "#A3BE8C",
+  purple: "#B48EAD",
+};
+
 export class Colors {
   static readonly deepDark = "#282C34";
   static readonly dark = "#3B4252";
