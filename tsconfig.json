@@ -4,15 +4,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": [
-        "./src/*"
-      ],
-      "@images/*": [
-        "./images/*"
-      ]
+      "@src/*": ["./src/*"],
+      "@images/*": ["./images/*"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

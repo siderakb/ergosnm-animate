@@ -5,9 +5,6 @@ import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
 import { all, createRef, waitFor } from "@motion-canvas/core";
 
-import { Mouse } from "@src/components/mouse";
-import { Monitor } from "@src/components/monitor";
-
 export default makeScene2D(function* (view) {
   // view.fill(Colors.deepDark); // Background color
 
@@ -19,32 +16,43 @@ export default makeScene2D(function* (view) {
   view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
   view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
 
-  // view.add(<Mouse fill={Colors.dark} primaryColor={Colors.red} />);
-  // view.add(<Monitor fill={Colors.dark} position={[0, -600]} />);
-
-  const snmY2 = 350;
-  const snmX2 = 620;
-  yield* all(
-    snmRight().position([-snmX2, snmY2], 0.5),
-    snmRight().scale(1, 0.5),
-
-    snmLeft().position([snmX2, snmY2], 0.5),
-    snmLeft().scale(1, 0.5),
+  const textRef = createRef<Txt>();
+  view.add(
+    <Txt
+      ref={textRef}
+      text=""
+      fill={Colors.light}
+      fontSize={128}
+      position={[0, -500]}
+    />,
   );
 
-  yield* waitFor(0.5);
+  // Layer switching
+  yield* waitFor(0.25);
   yield* all(
-    snmRight().switchLayer1(0.5),
     snmLeft().press([[4, 1]], 0.16),
+    snmRight().switchLayer1(0.5),
     snmLeft().switchLayer1(0.5),
   );
-  yield* waitFor(0.5);
-  // yield* snmLeft().trackballArrow(true, true, false, false, 1);
-  // yield* waitFor(0.5);
+  yield* waitFor(1.8);
   yield* all(
-    snmRight().switchLayer0(0.5),
     snmLeft().release([[4, 1]], 0.16),
+    snmRight().switchLayer0(0.5),
     snmLeft().switchLayer0(0.5),
   );
-  yield* waitFor(0.5);
+
+  yield* waitFor(0.15);
+
+  yield* all(
+    snmRight().press([[4, 4]], 0.16),
+    snmRight().switchLayer1(0.5),
+    snmLeft().switchLayer1(0.5),
+  );
+  yield* waitFor(1.2);
+  yield* all(
+    snmRight().release([[4, 4]], 0.16),
+    snmRight().switchLayer0(0.5),
+    snmLeft().switchLayer0(0.5),
+  );
+  yield* waitFor(0.25);
 });
