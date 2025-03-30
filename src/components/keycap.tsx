@@ -80,7 +80,11 @@ export class Keycap extends Node {
         <Txt
           ref={this.legendRef0}
           text={props.legend[0]}
-          fontSize={KeyCapDefine.fontSize}
+          fontSize={
+            props.legend[0].length === 1
+              ? KeyCapDefine.fontSize
+              : KeyCapDefine.fontSize / 1.25
+          }
           fill={KeyCapDefine.fontColor}
           position={[0, 0]} // Center
         />,
@@ -89,7 +93,11 @@ export class Keycap extends Node {
         <Txt
           ref={this.legendRef1}
           text={props.legend[1]}
-          fontSize={KeyCapDefine.fontSize}
+          fontSize={
+            props.legend[1].length === 1
+              ? KeyCapDefine.fontSize
+              : KeyCapDefine.fontSize / 1.25
+          }
           fill={KeyCapDefine.fontColor}
           position={[0, 0]} // Center
           opacity={0}
