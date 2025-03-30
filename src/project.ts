@@ -7,6 +7,7 @@ import keymapMedia from "./scenes/keymap-media?scene";
 import keymapArrow from "./scenes/keymap-arrow?scene";
 import keymapMouse from "./scenes/keymap-mouse?scene";
 import trackball from "./scenes/trackball?scene";
+import keyboard100 from "./scenes/keyboard100?scene";
 
 import { Code, LezerHighlighter } from "@motion-canvas/2d";
 import { parser } from "@lezer/javascript";
@@ -17,13 +18,15 @@ Code.defaultHighlighter = new LezerHighlighter(parser);
 
 export default makeProject({
   scenes: [
-    example,
-    // opening,
-    // keymap,
-    // keymapNumpad,
-    // keymapMedia,
-    // keymapArrow,
-    // keymapMouse,
-    // trackball,
+    // example,
+    // keyboard100,
+
+    opening,
+    keymap,
+    keymapNumpad,
+    keymapMedia,
+    keymapArrow,
+    keymapMouse,
+    trackball,
   ],
 });
