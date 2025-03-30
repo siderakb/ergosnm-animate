@@ -1,4 +1,4 @@
-import { makeScene2D, Txt } from "@motion-canvas/2d";
+import { Img, makeScene2D, Txt } from "@motion-canvas/2d";
 import { Colors } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
@@ -7,6 +7,8 @@ import { all, createRef, waitFor } from "@motion-canvas/core";
 
 import { Mouse } from "@src/components/mouse";
 import { Monitor } from "@src/components/monitor";
+
+import mouseSvg from "@images/mouse.svg";
 
 export default makeScene2D(function* (view) {
   // view.fill(Colors.deepDark); // Background color
@@ -18,6 +20,8 @@ export default makeScene2D(function* (view) {
   const snmLeft = createRef<ErgoSnmLeft>();
   view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
   view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
+
+  view.add(<Img src={mouseSvg} scale={0.8} />);
 
   // view.add(<Mouse fill={Colors.dark} primaryColor={Colors.red} />);
   // view.add(<Monitor fill={Colors.dark} position={[0, -600]} />);
