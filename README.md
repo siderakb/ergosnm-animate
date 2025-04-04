@@ -2,7 +2,7 @@
 
 An animation introducing [ErgoSNM keyboard](https://github.com/siderakb/ergo-snm-keyboard).
 
-Powered by [Motion Canvas](https://motioncanvas.io/).
+Powered by [Motion Canvas](https://motioncanvas.io/). Sound from [TTSMaker](https://ttsmaker.com/)
 
 ## Usage
 

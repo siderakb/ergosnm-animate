@@ -222,4 +222,5 @@ export default makeScene2D(function* (view) {
   yield* all(cubeRef().height(0, 0.15), cursorRef().opacity(0, 0.15));
 
   yield* waitUntil("e-ed");
+  yield* waitFor(5);
 });
