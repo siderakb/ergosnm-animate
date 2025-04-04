@@ -7,7 +7,8 @@
     "serve": "vite",
     "build": "tsc && vite build",
     "format": "npx prettier . --write",
-    "render": "bash render.sh"
+    "render": "bash render.sh",
+    "render:shorts": "bash shorts.sh"
   },
   "dependencies": {
     "@codemirror/language": "^6.11.0",

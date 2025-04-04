@@ -7,8 +7,8 @@
       null
     ],
     "size": {
-      "x": 3840,
-      "y": 2160
+      "x": 2160,
+      "y": 3840
     },
     "audioOffset": 0.3394069310468025
   },
@@ -18,7 +18,7 @@
   },
   "rendering": {
     "fps": 60,
-    "resolutionScale": 1,
+    "resolutionScale": 0.5,
     "colorSpace": "srgb",
     "exporter": {
       "name": "@motion-canvas/core/image-sequence",

@@ -1,5 +1,5 @@
 import { makeScene2D, Rect, Txt } from "@motion-canvas/2d";
-import { Colors } from "@src/config";
+import { BaseOffsetY, Colors, KeyboardDefine } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
@@ -8,15 +8,27 @@ import { RightClickMenu } from "@src/components/rightClickMenu";
 import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
+  view.y(BaseOffsetY);
   // view.fill(Colors.deepDark); // Background color
 
-  const snmY = 250;
-  const snmX = 750;
-  const snmScale = 1.25;
   const snmRight = createRef<ErgoSnmRight>();
   const snmLeft = createRef<ErgoSnmLeft>();
-  view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
-  view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
+  view.add(
+    <ErgoSnmRight
+      ref={snmRight}
+      x={-1 * KeyboardDefine.x + KeyboardDefine.rightOffset}
+      y={KeyboardDefine.y}
+      scale={KeyboardDefine.scale}
+    />,
+  );
+  view.add(
+    <ErgoSnmLeft
+      ref={snmLeft}
+      x={KeyboardDefine.x + KeyboardDefine.leftOffset}
+      y={KeyboardDefine.y}
+      scale={KeyboardDefine.scale}
+    />,
+  );
 
   const cubeRef = createRef<Rect>();
   view.add(
@@ -222,5 +234,5 @@ export default makeScene2D(function* (view) {
   yield* all(cubeRef().height(0, 0.15), cursorRef().opacity(0, 0.15));
 
   yield* waitUntil("e-ed");
-  yield* waitFor(5);
+  yield* waitFor(1);
 });

@@ -1,5 +1,5 @@
 import { Img, makeScene2D, Txt } from "@motion-canvas/2d";
-import { Colors } from "@src/config";
+import { BaseOffsetY, Colors, KeyboardDefine } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
@@ -8,15 +8,27 @@ import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
 import vialLogo from "@images/vial_logo.svg";
 
 export default makeScene2D(function* (view) {
+  view.y(BaseOffsetY);
   // view.fill(Colors.deepDark); // Background color
 
-  const snmY = 250;
-  const snmX = 750;
-  const snmScale = 1.25;
   const snmRight = createRef<ErgoSnmRight>();
   const snmLeft = createRef<ErgoSnmLeft>();
-  view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
-  view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
+  view.add(
+    <ErgoSnmRight
+      ref={snmRight}
+      x={-1 * KeyboardDefine.x + KeyboardDefine.rightOffset}
+      y={KeyboardDefine.y}
+      scale={KeyboardDefine.scale}
+    />,
+  );
+  view.add(
+    <ErgoSnmLeft
+      ref={snmLeft}
+      x={KeyboardDefine.x + KeyboardDefine.leftOffset}
+      y={KeyboardDefine.y}
+      scale={KeyboardDefine.scale}
+    />,
+  );
 
   const vialLogoRef = createRef<Img>();
   view.add(

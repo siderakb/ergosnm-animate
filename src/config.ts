@@ -54,3 +54,13 @@ export class KeyCapDefine {
 
   static readonly highlightColor = Colors.red;
 }
+
+export const KeyboardDefine = {
+  y: 250,
+  x: 505,
+  scale: 1.05,
+  rightOffset: 0,
+  leftOffset: 50,
+};
+
+export const BaseOffsetY = 700;
