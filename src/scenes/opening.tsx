@@ -3,7 +3,7 @@ import { Colors } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
-import { all, createRef, waitFor } from "@motion-canvas/core";
+import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
   //   view.fill(Colors.deepDark); // Background color
@@ -28,7 +28,7 @@ export default makeScene2D(function* (view) {
     />,
   );
 
-  yield* waitFor(0.5);
+  yield* waitUntil("e-op");
 
   yield* all(snmLeft().press([[2, 0]], 0.16), textRef().text("h", 0.16));
   yield* snmLeft().release([[2, 0]], 0.16);
@@ -46,7 +46,7 @@ export default makeScene2D(function* (view) {
   yield* all(snmLeft().press([[1, 3]], 0.16), textRef().text("hello", 0.16));
   yield* snmLeft().release([[1, 3]], 0.16);
 
-  yield* waitFor(0.5);
+  yield* waitUntil("e-ed");
   yield* textRef().opacity(0, 0.25);
   //   yield* textRef().text("", 0.25);
 });

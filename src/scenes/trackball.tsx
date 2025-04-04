@@ -5,7 +5,7 @@ import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
 import { Cursor } from "@src/components/cursor";
 import { RightClickMenu } from "@src/components/rightClickMenu";
-import { all, createRef, waitFor } from "@motion-canvas/core";
+import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
   // view.fill(Colors.deepDark); // Background color
@@ -76,7 +76,8 @@ export default makeScene2D(function* (view) {
   //     />,
   //   );
 
-  yield* waitFor(0.8);
+  yield* waitUntil("e-op");
+
   yield* all(
     cursorRef().position([0, -500], 1.5),
     snmLeft().trackballArrow(true, true, true, true, 1),
@@ -91,7 +92,7 @@ export default makeScene2D(function* (view) {
   );
   yield* snmLeft().trackballArrow(false, false, false, false, 0.5);
 
-  // Left click
+  // Left hold
   yield* all(
     cubeRef().scale(0.85, 0.15),
     snmLeft().press(
@@ -114,6 +115,7 @@ export default makeScene2D(function* (view) {
   );
   yield* snmLeft().trackballArrow(false, false, false, false, 0.5);
 
+  // Left release
   yield* all(
     cubeRef().scale(1, 0.15),
     snmLeft().release(
@@ -124,7 +126,59 @@ export default makeScene2D(function* (view) {
       0.16,
     ),
   );
+
+  // Switch to layer 2
+  yield* waitFor(0.8);
+  yield* all(
+    snmRight().press([[4, 4]], 0.16),
+    snmRight().switchLayer1(0.5),
+    snmLeft().switchLayer1(0.5),
+  );
+
+  // Scroll up
+  yield* waitFor(0.5);
+  yield* all(
+    cubeRef().scale(2, 1.8),
+    snmLeft().trackballArrow(true, true, true, true, 1), // TODO
+  );
+  yield* snmLeft().trackballArrow(false, false, false, false, 1);
+
+  // Switch to layer 1
   yield* waitFor(1);
+  yield* all(
+    snmRight().release([[4, 4]], 0.16),
+    snmRight().switchLayer0(0.5),
+    snmLeft().switchLayer0(0.5),
+  );
+
+  // Middle click
+  yield* waitFor(1);
+  yield* all(
+    snmLeft().press(
+      [
+        [2, 3],
+        [2, 1],
+      ],
+      0.16,
+    ),
+  );
+
+  // Scroll down
+  yield* waitFor(1);
+  yield* all(
+    cubeRef().scale(1, 1.8),
+    snmLeft().trackballArrow(true, true, true, true, 0.16), // TODO
+  );
+  yield* snmLeft().trackballArrow(false, false, false, false, 0.16);
+
+  yield* waitFor(1);
+  yield* snmLeft().release(
+    [
+      [2, 3],
+      [2, 1],
+    ],
+    0.16,
+  );
 
   // Right click
   yield* all(
@@ -164,61 +218,8 @@ export default makeScene2D(function* (view) {
     0.16,
   );
 
-  // Switch layer
-  yield* waitFor(1);
-  yield* all(
-    snmRight().press([[4, 4]], 0.16),
-    snmRight().switchLayer1(0.5),
-    snmLeft().switchLayer1(0.5),
-  );
-
-  // Scroll up
-  yield* waitFor(0.5);
-  yield* all(
-    cubeRef().scale(2, 1.8),
-    snmLeft().trackballArrow(true, true, true, true, 1), // TODO
-  );
-  yield* snmLeft().trackballArrow(false, false, false, false, 1);
-
-  // Switch layer
-  yield* waitFor(1);
-  yield* all(
-    snmRight().release([[4, 4]], 0.16),
-    snmRight().switchLayer0(0.5),
-    snmLeft().switchLayer0(0.5),
-  );
-
-  // Middle click
-  yield* waitFor(1);
-  yield* all(
-    snmLeft().press(
-      [
-        [2, 3],
-        [2, 1],
-      ],
-      0.16,
-    ),
-  );
-
-  // Scroll down
-  yield* waitFor(1);
-  yield* all(
-    cubeRef().scale(1, 1.8),
-    snmLeft().trackballArrow(true, true, true, true, 0.16), // TODO
-  );
-  yield* snmLeft().trackballArrow(false, false, false, false, 0.16);
-
-  yield* waitFor(1);
-  yield* snmLeft().release(
-    [
-      [2, 3],
-      [2, 1],
-    ],
-    0.16,
-  );
-
   yield* waitFor(1);
   yield* all(cubeRef().height(0, 0.15), cursorRef().opacity(0, 0.15));
 
-  yield* waitFor(0.25);
+  yield* waitUntil("e-ed");
 });

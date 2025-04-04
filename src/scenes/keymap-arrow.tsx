@@ -1,9 +1,11 @@
-import { makeScene2D, Txt } from "@motion-canvas/2d";
+import { Img, makeScene2D, Txt } from "@motion-canvas/2d";
 import { Colors } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
-import { all, createRef, waitFor } from "@motion-canvas/core";
+import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
+
+import vialLogo from "@images/vial_logo.svg";
 
 export default makeScene2D(function* (view) {
   // view.fill(Colors.deepDark); // Background color
@@ -15,6 +17,17 @@ export default makeScene2D(function* (view) {
   const snmLeft = createRef<ErgoSnmLeft>();
   view.add(<ErgoSnmRight ref={snmRight} x={-snmX} y={snmY} scale={snmScale} />);
   view.add(<ErgoSnmLeft ref={snmLeft} x={snmX} y={snmY} scale={snmScale} />);
+
+  const vialLogoRef = createRef<Img>();
+  view.add(
+    <Img
+      ref={vialLogoRef}
+      src={vialLogo}
+      position={[0, -600]}
+      scale={6}
+      opacity={0}
+    />,
+  );
 
   const textRef = createRef<Txt>();
   view.add(
@@ -28,6 +41,7 @@ export default makeScene2D(function* (view) {
     />,
   );
 
+  yield* waitUntil("e-op");
   yield* all(
     snmRight().press([[4, 4]], 0.16),
     snmRight().switchLayer1(0.5),
@@ -59,11 +73,19 @@ export default makeScene2D(function* (view) {
   yield* all(snmLeft().press([[2, 3]], 0.16), textRef().text("↑↑↓↓←→←→", 0.16));
   yield* snmLeft().release([[2, 3]], 0.16);
 
-  yield* waitFor(0.15);
+  yield* waitUntil("e-release");
   yield* all(
     snmRight().release([[4, 4]], 0.16),
     snmRight().switchLayer0(0.5),
     snmLeft().switchLayer0(0.5),
+    textRef().opacity(0, 0.5),
   );
-  yield* waitFor(0.25);
+  yield* waitFor(0.15);
+
+  yield* waitUntil("e-vial-on");
+  yield* vialLogoRef().opacity(1, 0.25);
+  yield* waitUntil("e-vial-off");
+  yield* vialLogoRef().opacity(0, 0.25);
+
+  // yield* waitUntil("e-ed");
 });

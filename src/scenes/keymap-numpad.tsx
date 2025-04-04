@@ -3,7 +3,7 @@ import { Colors } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
-import { all, createRef, waitFor } from "@motion-canvas/core";
+import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
   // view.fill(Colors.deepDark); // Background color
@@ -28,6 +28,7 @@ export default makeScene2D(function* (view) {
     />,
   );
 
+  yield* waitUntil("e-op");
   // Numpad
   yield* all(
     snmRight().press([[4, 4]], 0.16),
@@ -63,10 +64,32 @@ export default makeScene2D(function* (view) {
   );
   yield* snmRight().release([[3, 3]], 0.16);
 
+  yield* waitFor(0.35);
+
+  yield* all(
+    snmRight().press([[1, 5]], 0.16),
+    textRef().text("7.297352+", 0.16),
+  );
+  yield* snmRight().release([[1, 5]], 0.16);
+
+  yield* all(
+    snmRight().press([[3, 3]], 0.16),
+    textRef().text("7.297352+2", 0.16),
+  );
+  yield* snmRight().release([[3, 3]], 0.16);
+
+  yield* all(
+    snmRight().press([[2, 3]], 0.16),
+    textRef().text("7.297352+25", 0.16),
+  );
+  yield* snmRight().release([[2, 3]], 0.16);
+
   yield* all(
     snmRight().release([[4, 4]], 0.16),
     snmRight().switchLayer0(0.5),
     snmLeft().switchLayer0(0.5),
   );
-  yield* waitFor(0.25);
+
+  yield* waitUntil("e-ed");
+  yield* textRef().opacity(0, 0.5);
 });

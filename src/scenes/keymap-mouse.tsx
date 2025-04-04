@@ -3,7 +3,7 @@ import { Colors } from "@src/config";
 
 import { ErgoSnmRight } from "@src/components/ergosnm-right";
 import { ErgoSnmLeft } from "@src/components/ergosnm-left";
-import { all, createRef, waitFor } from "@motion-canvas/core";
+import { all, createRef, waitFor, waitUntil } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
   // view.fill(Colors.deepDark); // Background color
@@ -40,7 +40,7 @@ export default makeScene2D(function* (view) {
   //     />,
   //   );
 
-  yield* waitFor(0.8);
+  yield* waitUntil("e-op");
 
   // Left click
   yield* all(
@@ -53,6 +53,7 @@ export default makeScene2D(function* (view) {
     ),
     textRef().opacity(1, 0.16),
   );
+  yield* waitUntil("e-left-click");
   yield* snmLeft().release(
     [
       [2, 1],
@@ -75,7 +76,7 @@ export default makeScene2D(function* (view) {
     ],
     0.16,
   );
-  yield* waitFor(0.35);
+  yield* waitUntil("e-left-click-ed");
   yield* textRef().opacity(0, 0.25);
   yield* textRef().text("Right click", 0);
 
@@ -90,6 +91,7 @@ export default makeScene2D(function* (view) {
     ),
     textRef().opacity(1, 0.16),
   );
+  yield* waitUntil("e-right-click");
   yield* snmLeft().release(
     [
       [2, 3],
@@ -112,7 +114,7 @@ export default makeScene2D(function* (view) {
     ],
     0.16,
   );
-  yield* waitFor(0.35);
+  yield* waitUntil("e-right-click-ed");
   yield* textRef().opacity(0, 0.25);
   yield* textRef().text("Middle click", 0);
 
@@ -127,6 +129,7 @@ export default makeScene2D(function* (view) {
     ),
     textRef().opacity(1, 0.16),
   );
+  yield* waitUntil("e-middle-click");
   yield* snmLeft().release(
     [
       [2, 3],
@@ -149,8 +152,7 @@ export default makeScene2D(function* (view) {
     ],
     0.16,
   );
-  yield* waitFor(0.35);
-  yield* textRef().opacity(0, 0.25);
 
-  yield* waitFor(0.25);
+  yield* textRef().opacity(0, 0.25);
+  yield* waitUntil("e-ed");
 });

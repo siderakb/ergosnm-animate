@@ -1,5 +1,34 @@
 {
   "version": 0,
-  "timeEvents": [],
+  "timeEvents": [
+    {
+      "name": "e-op",
+      "targetTime": 2.3729083058703613
+    },
+    {
+      "name": "e-left-click",
+      "targetTime": 3.4500853240715754
+    },
+    {
+      "name": "e-left-click-ed",
+      "targetTime": 4.080085324071575
+    },
+    {
+      "name": "e-right-click",
+      "targetTime": 5.053987072072135
+    },
+    {
+      "name": "e-right-click-ed",
+      "targetTime": 5.683987072072136
+    },
+    {
+      "name": "e-middle-click",
+      "targetTime": 6.809183824042119
+    },
+    {
+      "name": "e-ed",
+      "targetTime": 7.726999503809714
+    }
+  ],
   "seed": 435194727
 }
