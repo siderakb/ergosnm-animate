@@ -6,7 +6,8 @@
     "start": "vite",
     "serve": "vite",
     "build": "tsc && vite build",
-    "format": "npx prettier . --write"
+    "format": "npx prettier . --write",
+    "render": "bash render.sh"
   },
   "dependencies": {
     "@codemirror/language": "^6.11.0",

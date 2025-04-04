@@ -10,3 +10,13 @@ Powered by [Motion Canvas](https://motioncanvas.io/).
 pnpm install
 pnpm start
 ```
+
+Render:
+
+```bash
+pnpm render
+
+# or
+
+./render.sh
+```

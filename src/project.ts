@@ -9,7 +9,7 @@ import keymapMouse from "./scenes/keymap-mouse?scene";
 import trackball from "./scenes/trackball?scene";
 import keyboard100 from "./scenes/keyboard100?scene";
 
-import audio1 from "../../t1_3.mp3";
+import audio from "../audio/audio.mp3";
 
 import { Code, LezerHighlighter } from "@motion-canvas/2d";
 import { parser } from "@lezer/javascript";
@@ -31,5 +31,5 @@ export default makeProject({
     keymapMouse,
     trackball,
   ],
-  audio: audio1,
+  audio: audio,
 });
