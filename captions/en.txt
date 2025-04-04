@@ -1,14 +1,12 @@
 This is ErgoSNM, a split mechanical keyboard with an integrated trackball. This video will introduce the basic functions of the ErgoSNM.
 
-ErgoSNM Rev2 runs QMK and supports real-time key remapping via Vial.
-
 By pressing the left or right function key, you can switch to Layer 2, which provides additional key functions.
 
 In Layer 2, you can enter numbers using only your left hand, allowing your right hand to control the cursor.
 
 You can also adjust the volume.
 
-I placed the arrow keys on HJKL, just like in Vim. If you don't use Vim, this layout might feel unintuitive. But that's okay. You can customize any key using Vial to match your preference.
+I placed the arrow keys on H J K L, just like in Vim. If you don't use Vim, this layout might feel unintuitive. But that's okay. You can customize any key using Vial to match your preference.
 
 Next are the mouse functions, press J and K to perform a left-click, K and L for a right-click, and J and L for a middle-click.
 

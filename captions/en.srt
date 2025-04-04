@@ -1,0 +1,103 @@
+1
+00:00:00,187 --> 00:00:01,721
+This is ErgoSNM
+
+2
+00:00:01,746 --> 00:00:04,966
+a split mechanical keyboard with an integrated trackball
+
+3
+00:00:05,232 --> 00:00:08,999
+This video will introduce the basic functions of the ErgoSNM
+
+4
+00:00:09,631 --> 00:00:11,798
+By pressing the left or right Fn key
+
+5
+00:00:11,937 --> 00:00:13,365
+you can switch to layer 2
+
+6
+00:00:13,495 --> 00:00:15,495
+which provides additional key functions
+
+7
+00:00:16,102 --> 00:00:17,030
+In layer 2
+
+8
+00:00:17,185 --> 00:00:19,697
+you can enter numbers using only your left hand
+
+9
+00:00:19,799 --> 00:00:21,799
+allowing your right hand to control the cursor
+
+10
+00:00:21,917 --> 00:00:23,696
+You can also adjust the volume
+
+11
+00:00:24,223 --> 00:00:26,862
+I placed the arrow keys on H J K L
+
+12
+00:00:26,862 --> 00:00:28,195
+just like in Vim
+
+13
+00:00:28,217 --> 00:00:29,561
+If you don't use Vim
+
+14
+00:00:29,561 --> 00:00:31,561
+this layout might feel unintuitive
+
+15
+00:00:31,856 --> 00:00:36,027
+But that's okay. You can customize any key using Vial to match your preference
+
+16
+00:00:36,660 --> 00:00:38,260
+Next are the mouse functions
+
+17
+00:00:38,260 --> 00:00:40,592
+press J & K to perform a left-click
+
+18
+00:00:40,592 --> 00:00:42,292
+K & L for a right-click
+
+19
+00:00:42,292 --> 00:00:43,925
+and J & L for a middle-click
+
+20
+00:00:44,505 --> 00:00:46,625
+The trackball is controlled with your thumb
+
+21
+00:00:46,625 --> 00:00:50,024
+allowing you to move the cursor while keeping your right hand on the home row
+
+22
+00:00:50,596 --> 00:00:51,957
+when you hold the Fn key
+
+23
+00:00:51,957 --> 00:00:53,957
+the trackball switches to scroll mode
+
+24
+00:00:53,957 --> 00:00:55,789
+enabling vertical scrolling
+
+25
+00:00:56,410 --> 00:01:00,422
+Alternatively, holding J & L also activates scroll mode
+
+26
+00:01:00,422 --> 00:01:04,288
+This means you can perform most mouse operations using only your right hand
